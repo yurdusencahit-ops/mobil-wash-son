@@ -1,106 +1,166 @@
-  
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobil Wash | Kapıda Araç Yıkama</title>
+<title>Mobil Wash | Profesyonel Kapıda Araç Yıkama</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
-body { font-family: 'Poppins', sans-serif; }
-.hero-bg {
-position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1200&q=80');
-background-size: cover; background-position: center; z-index: -1;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Poppins:wght@300;400;700&display=swap');
+
+body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: white; }
+.font-heavy { font-family: 'Montserrat', sans-serif; }
+
+/* Göz Alıcı Arka Plan */
+.hero-section {
+background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)),
+url('https://images.unsplash.com/photo-1605152276897-4f618f831968?auto=format&fit=crop&w=1200&q=80');
+background-size: cover; background-position: center; min-height: 100vh;
 }
+
+/* Parlayan Buton Efekti */
+.btn-glow {
+box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+animation: pulse-glow 2s infinite;
+}
+@keyframes pulse-glow {
+0% { box-shadow: 0 0 5px rgba(34, 197, 94, 0.4); }
+50% { box-shadow: 0 0 25px rgba(34, 197, 94, 0.8); }
+100% { box-shadow: 0 0 5px rgba(34, 197, 94, 0.4); }
+}
+
+/* Kayan Yazı Şeridi */
+.ticker { white-space: nowrap; overflow: hidden; background: #2563eb; padding: 10px 0; }
+.ticker-text { display: inline-block; animation: ticker 20s linear infinite; font-weight: bold; text-transform: uppercase; }
+@keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
 #admin-panel {
 display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-background: white; padding: 25px; border-radius: 20px; box-shadow: 0 0 50px rgba(0,0,0,0.5);
-z-index: 9999; width: 320px; border-top: 6px solid #2563eb;
+background: white; color: black; padding: 30px; border-radius: 24px; z-index: 1000; width: 90%; max-width: 400px;
 }
 </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
-<div id="notification" class="fixed bottom-6 left-6 bg-white p-4 rounded-2xl shadow-2xl z-50 border-l-8 border-blue-600 flex items-center">
-<i class="fa-solid fa-circle-check text-blue-600 mr-3 text-xl"></i>
-<p id="notif-text" class="text-sm font-bold text-gray-700 italic text-sm font-bold">Beşiktaş'ta bir araç yıkandı!</p>
+<div class="ticker">
+<div class="ticker-text text-sm tracking-widest">
+⚡ ŞİMDİ RANDEVU ALIN, ARACINIZI YERİNDE PIRIL PIRIL YAPALIM! • İSTANBUL'UN TÜM SEMTLERİNE MOBİL HİZMET • KENDİ SUYUMUZ VE ELEKTRİĞİMİZLE GELİYORUZ!
+</div>
 </div>
 
-<header class="relative text-white py-32 text-center px-4">
-<div class="hero-bg"></div>
-<h1 class="text-6xl font-black mb-4 uppercase leading-tight">MOBİL<span class="text-blue-500">WASH</span></h1>
-<p class="text-2xl font-bold mb-10 uppercase tracking-wide">Aracınızı Kapınızda Yıkıyoruz!</p>
-<a href="https://wa.me/905307366945" class="bg-green-500 hover:bg-green-600 text-white px-12 py-5 rounded-3xl text-xl font-black transition shadow-2xl flex items-center justify-center inline-flex">
+<section class="hero-section flex items-center justify-center px-6 relative overflow-hidden">
+<div class="max-w-4xl text-center z-10">
+<h1 class="font-heavy text-5xl md:text-8xl mb-6 animate__animated animate__backInDown tracking-tighter">
+MOBİL<span class="text-blue-500">WASH</span>
+</h1>
+<p class="text-lg md:text-2xl text-gray-300 mb-10 animate__animated animate__fadeInUp animate__delay-1s">
+Siz Dinlenin, Biz Gelelim. Profesyonel Ekipmanlarla Kapınızda Araç Yıkama.
+</p>
+
+<div class="flex flex-col md:flex-row gap-4 justify-center animate__animated animate__zoomIn animate__delay-2s">
+<a href="https://wa.me/905307366945" class="btn-glow bg-green-600 hover:bg-green-700 text-white px-10 py-5 rounded-full text-xl font-bold flex items-center justify-center transition-all transform hover:scale-110">
 <i class="fa-brands fa-whatsapp text-3xl mr-3"></i> WHATSAPP RANDEVU
 </a>
-</header>
-
-<section class="py-20 max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10">
-<div class="bg-white p-10 rounded-[45px] shadow-xl text-center border-b-8 border-blue-500">
-<i class="fa-solid fa-car text-6xl text-blue-500 mb-6"></i>
-<h4 class="text-2xl font-black mb-4 uppercase tracking-tighter">Binek Araç</h4>
-<div id="p-binek" class="text-5xl font-black text-blue-600 mb-4 tracking-tighter leading-none">550 TL</div>
-<p class="text-gray-400 font-bold uppercase italic text-xs">Profesyonel Dış Yıkama</p>
+<a href="tel:05307366945" class="bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-full text-xl font-bold flex items-center justify-center transition-all">
+<i class="fa-solid fa-phone-volume text-2xl mr-3"></i> HEMEN ARA
+</a>
 </div>
-<div class="bg-white p-10 rounded-[45px] shadow-xl text-center border-b-8 border-blue-900">
-<i class="fa-solid fa-truck-monster text-6xl text-blue-900 mb-6"></i>
-<h4 class="text-2xl font-black mb-4 uppercase tracking-tighter">SUV / VIP</h4>
-<div id="p-suv" class="text-5xl font-black text-blue-600 mb-4 tracking-tighter leading-none">750 TL</div>
-<p class="text-gray-400 font-bold uppercase italic text-xs">Büyük Araç Dış Yıkama</p>
 </div>
 </section>
 
-<footer class="bg-gray-900 text-white py-16 text-center px-4">
-<p class="text-3xl font-black mb-4 tracking-widest text-blue-500">0530 736 69 45</p>
-<p class="text-gray-500 font-medium">İstanbul'un her noktasına mobil hizmet.</p>
-<button onclick="adminAc()" class="mt-12 text-gray-800 text-[10px] opacity-10 hover:opacity-100 uppercase font-black">Ayarlar</button>
+<section class="py-20 bg-slate-900 px-6">
+<div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 text-center">
+<div class="p-8 border border-slate-800 rounded-3xl hover:bg-slate-800 transition">
+<i class="fa-solid fa-bolt-lightning text-5xl text-blue-500 mb-6"></i>
+<h3 class="text-xl font-bold mb-4 uppercase">Hızlı Servis</h3>
+<p class="text-gray-400">Dakikalar içinde adresinize ulaşıyoruz.</p>
+</div>
+<div class="p-8 border border-slate-800 rounded-3xl hover:bg-slate-800 transition">
+<i class="fa-solid fa-faucet-drip text-5xl text-blue-500 mb-6"></i>
+<h3 class="text-xl font-bold mb-4 uppercase">Sıfır Atık</h3>
+<p class="text-gray-400">Çevreci ve temiz yıkama yöntemleri.</p>
+</div>
+<div class="p-8 border border-slate-800 rounded-3xl hover:bg-slate-800 transition">
+<i class="fa-solid fa-shield-heart text-5xl text-blue-500 mb-6"></i>
+<h3 class="text-xl font-bold mb-4 uppercase">Güvenli Hizmet</h3>
+<p class="text-gray-400">Aracınız uzman ellere emanet.</p>
+</div>
+</div>
+</section>
+
+<section class="py-24 px-6 bg-slate-950">
+<h2 class="font-heavy text-4xl text-center mb-16 uppercase italic underline decoration-blue-500">Hizmet Paketlerimiz</h2>
+<div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
+<div class="bg-slate-900 p-12 rounded-[40px] border-t-8 border-blue-500 shadow-2xl transform transition hover:-translate-y-4">
+<div class="flex justify-between items-start mb-8">
+<i class="fa-solid fa-car text-6xl text-blue-500"></i>
+<span class="bg-blue-500/20 text-blue-400 px-4 py-1 rounded-full text-xs font-bold uppercase">En Çok Tercih Edilen</span>
+</div>
+<h4 class="text-3xl font-black mb-2 uppercase">Binek Araç</h4>
+<p class="text-gray-500 mb-8 italic">İç-Dış Detaylı Temizlik</p>
+<div id="price-binek" class="text-6xl font-black text-white mb-6 tracking-tighter">550 TL</div>
+<ul class="text-gray-400 space-y-3 mb-10">
+<li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Şampuanlı Dış Yıkama</li>
+<li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Jant ve Lastik Bakımı</li>
+</ul>
+</div>
+
+<div class="bg-slate-900 p-12 rounded-[40px] border-t-8 border-blue-800 shadow-2xl transform transition hover:-translate-y-4">
+<i class="fa-solid fa-truck-monster text-6xl text-blue-800 mb-8"></i>
+<h4 class="text-3xl font-black mb-2 uppercase">SUV / VIP</h4>
+<p class="text-gray-500 mb-8 italic">Büyük Araçlara Özel Bakım</p>
+<div id="price-suv" class="text-6xl font-black text-white mb-6 tracking-tighter">750 TL</div>
+<ul class="text-gray-400 space-y-3 mb-10">
+<li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Geniş Gövde Temizliği</li>
+<li><i class="fa-solid fa-circle-check text-green-500 mr-2"></i> Detaylı Jant Temizliği</li>
+</ul>
+</div>
+</div>
+</section>
+
+<footer class="py-20 text-center bg-slate-900 border-t border-slate-800">
+<h3 class="font-heavy text-3xl mb-4 text-blue-500">MOBİL WASH</h3>
+<p class="text-gray-400 mb-8 tracking-widest uppercase">İstanbul Geneli Profesyonel Hizmet</p>
+<button onclick="openAdmin()" class="opacity-10 hover:opacity-100 text-[10px] uppercase font-bold text-gray-600 transition">Sistem Ayarları</button>
 </footer>
 
-<div id="admin-panel">
-<h4 class="text-lg font-black mb-4 border-b-2 pb-2 text-blue-600 uppercase">Fiyat Ayarları</h4>
-<label class="text-[10px] font-bold text-gray-400 uppercase">Binek Fiyatı</label>
-<input id="in-binek" type="text" class="w-full border-2 p-2 mb-3 rounded-lg outline-none focus:border-blue-500 font-bold">
-<label class="text-[10px] font-bold text-gray-400 uppercase">SUV Fiyatı</label>
-<input id="in-suv" type="text" class="w-full border-2 p-2 mb-3 rounded-lg outline-none focus:border-blue-500 font-bold">
-<label class="text-[10px] font-bold text-gray-400 uppercase">Bölgeler (Virgülle)</label>
-<textarea id="in-cities" class="w-full border-2 p-2 mb-4 rounded-lg outline-none focus:border-blue-500 h-20 text-sm font-medium"></textarea>
-<button onclick="kaydet()" class="bg-blue-600 text-white w-full py-3 rounded-xl font-black shadow-lg">AYARLARI KAYDET</button>
-<button onclick="document.getElementById('admin-panel').style.display='none'" class="w-full mt-3 text-red-500 text-xs font-bold uppercase">Kapat</button>
+<div id="admin-panel" class="shadow-2xl border-4 border-blue-600">
+<h4 class="text-xl font-black mb-6 border-b pb-2 uppercase tracking-tighter">Fiyat Güncelleme</h4>
+<div class="space-y-4">
+<input id="in-binek" type="text" placeholder="Binek Fiyat" class="w-full border-2 border-gray-200 p-3 rounded-xl font-bold">
+<input id="in-suv" type="text" placeholder="SUV Fiyat" class="w-full border-2 border-gray-200 p-3 rounded-xl font-bold">
+<button onclick="savePrices()" class="bg-blue-600 text-white w-full py-4 rounded-xl font-black hover:bg-blue-700 transition">AYARLARI KAYDET</button>
+<button onclick="document.getElementById('admin-panel').style.display='none'" class="w-full text-red-500 text-xs font-bold mt-2 uppercase">Kapat</button>
+</div>
 </div>
 
 <script>
-let bVal = localStorage.getItem('s_binek') || "550 TL";
-let sVal = localStorage.getItem('s_suv') || "750 TL";
-let cVal = (localStorage.getItem('s_cities') || "Beşiktaş, Şişli, Kadıköy, Sarıyer, Üsküdar, Bakırköy, Ataşehir").split(',');
+// Verileri Yükle
+let bPrice = localStorage.getItem('bPrice') || "550 TL";
+let sPrice = localStorage.getItem('sPrice') || "750 TL";
 
-document.getElementById('p-binek').innerText = bVal;
-document.getElementById('p-suv').innerText = sVal;
+document.getElementById('price-binek').innerText = bPrice;
+document.getElementById('price-suv').innerText = sPrice;
 
-function adminAc() {
-let s = prompt("Yönetici Şifresi:");
-if(s === "1234") {
+function openAdmin() {
+let pass = prompt("Şifre Girin:");
+if(pass === "1234") {
 document.getElementById('admin-panel').style.display = 'block';
-document.getElementById('in-binek').value = bVal;
-document.getElementById('in-suv').value = sVal;
-document.getElementById('in-cities').value = cVal.join(', ');
+document.getElementById('in-binek').value = bPrice;
+document.getElementById('in-suv').value = sPrice;
 }
 }
 
-function kaydet() {
-localStorage.setItem('s_binek', document.getElementById('in-binek').value);
-localStorage.setItem('s_suv', document.getElementById('in-suv').value);
-localStorage.setItem('s_cities', document.getElementById('in-cities').value);
-alert("Siteniz Güncellendi!");
+function savePrices() {
+localStorage.setItem('bPrice', document.getElementById('in-binek').value);
+localStorage.setItem('sPrice', document.getElementById('in-suv').value);
+alert("Fiyatlar Güncellendi!");
 location.reload();
 }
-
-setInterval(() => {
-const city = cVal[Math.floor(Math.random() * cVal.length)];
-document.getElementById('notif-text').innerText = `${city.trim()}'ta bir araç yıkandı!`;
-}, 6000);
 </script>
 </body>
 </html>
+
+
