@@ -1,98 +1,70 @@
-<script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<div class="bg-gray-50 min-h-screen font-sans antialiased">
+<script>
+const fiyatlar = {
+disYikama: "650",
+icDisYikama: "1.100",
+detayliTemizlik: "2.400"
+};
 
-<header class="bg-white shadow-md sticky top-0 z-50">
-<div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+// Sayfa yüklendiğinde fiyatları yerleştirir
+window.onload = () => {
+document.getElementById('fiyat1').innerText = '₺' + fiyatlar.disYikama;
+document.getElementById('fiyat2').innerText = '₺' + fiyatlar.icDisYikama;
+document.getElementById('fiyat3').innerText = '₺' + fiyatlar.detayliTemizlik;
+};
+</script>
+
+<div class="bg-gray-50 min-h-screen font-sans">
+
+<header class="bg-white shadow-md p-4 sticky top-0 z-50">
+<div class="max-w-6xl mx-auto flex justify-between items-center">
 <div class="flex items-center space-x-2">
-<div class="bg-blue-600 p-2 rounded-lg">
-<i class="fas fa-car-clean text-white text-xl"></i>
+<i class="fas fa-car-side text-blue-600 text-2xl"></i>
+<span class="font-bold text-xl text-blue-900">MOBİL YIKAMA 2026</span>
 </div>
-<span class="font-black text-2xl text-blue-900 tracking-tighter">MOBİL YIKAMA</span>
-</div>
-<div class="hidden md:flex items-center space-x-8 text-sm font-bold text-gray-600 uppercase">
-<a href="#" class="hover:text-blue-600 transition">Hizmetler</a>
-<a href="#" class="hover:text-blue-600 transition">Nasıl Çalışır?</a>
-<a href="tel:05000000000" class="text-blue-700 bg-blue-50 px-4 py-2 rounded-full border border-blue-100 italic">05xx xxx xx xx</a>
-</div>
+<button class="bg-green-500 text-white px-6 py-2 rounded-full font-bold">Randevu Al</button>
 </div>
 </header>
 
-<section class="relative bg-blue-900 py-20 overflow-hidden">
-<div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-<div class="max-w-4xl mx-auto text-center relative px-4">
-<h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
-Arabanızı <span class="text-blue-400">Olduğu Yerde</span> Tertemiz Yapıyoruz
-</h1>
-<p class="text-blue-100 text-xl mb-10 max-w-2xl mx-auto font-light">
-2026 teknolojisi ile kapınızda profesyonel mobil yıkama hizmeti. Siz kahvenizi yudumlayın, biz parlatmaya gelelim.
-</p>
-<button class="bg-green-500 hover:bg-green-600 text-white text-xl font-black px-12 py-5 rounded-2xl shadow-2xl transform hover:-translate-y-1 transition-all uppercase tracking-widest">
-Şimdi Randevu Al
-</button>
-</div>
-</section>
-
-<section class="max-w-6xl mx-auto px-4 -mt-16 relative z-10 pb-20">
+<section class="max-w-6xl mx-auto px-4 py-20">
 <div class="grid md:grid-cols-3 gap-8">
 
-<div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 flex flex-col">
-<div class="mb-6">
-<span class="text-blue-600 font-bold uppercase tracking-widest text-xs">Hızlı Çözüm</span>
-<h3 class="text-2xl font-black text-gray-800">Dış Yıkama</h3>
-</div>
-<div class="text-5xl font-black text-blue-900 mb-8">₺650</div>
-<ul class="space-y-4 mb-10 flex-grow">
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Köpüklü Yıkama</li>
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Cam Temizliği</li>
-<li class="flex items-center text-gray-300 italic line-through"><i class="fas fa-times-circle mr-3"></i> Jant Temizliği</li>
+<div class="bg-white rounded-3xl p-8 shadow-lg border-t-4 border-blue-400">
+<h3 class="text-xl font-bold text-gray-800 mb-4 uppercase text-center">Dış Yıkama</h3>
+<div id="fiyat1" class="text-4xl font-black text-blue-900 text-center mb-8 italic">--</div>
+<ul class="space-y-4 mb-8 text-gray-600">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Köpüklü Yıkama</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Cam Temizliği</li>
 </ul>
-<button class="w-full py-4 rounded-xl border-2 border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white transition">Paketi Seç</button>
+<button class="w-full py-3 border-2 border-blue-600 text-blue-600 font-bold rounded-xl">Seç</button>
 </div>
 
-<div class="bg-white rounded-3xl p-8 shadow-2xl border-4 border-blue-500 flex flex-col relative transform scale-105">
-<div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-6 py-1 rounded-full text-sm font-bold uppercase">En Popüler</div>
-<div class="mb-6">
-<span class="text-blue-600 font-bold uppercase tracking-widest text-xs">Tam Bakım</span>
-<h3 class="text-2xl font-black text-gray-800">İç + Dış Yıkama</h3>
-</div>
-<div class="text-5xl font-black text-blue-900 mb-8">₺1.100</div>
-<ul class="space-y-4 mb-10 flex-grow">
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Detaylı Dış Yıkama</li>
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> İç Vakumlama</li>
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Torpido Bakımı</li>
-<li class="flex items-center text-gray-300 italic line-through"><i class="fas fa-times-circle mr-3"></i> Jant Temizliği</li>
+<div class="bg-white rounded-3xl p-8 shadow-2xl border-t-4 border-blue-600 transform scale-105">
+<h3 class="text-xl font-bold text-gray-800 mb-4 uppercase text-center">İç + Dış Yıkama</h3>
+<div id="fiyat2" class="text-4xl font-black text-blue-900 text-center mb-8 italic">--</div>
+<ul class="space-y-4 mb-8 text-gray-600">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Detaylı Dış Yıkama</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> İç Vakumlama</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Torpido Bakımı</li>
 </ul>
-<button class="w-full py-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">Hemen Randevu Al</button>
+<button class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl shadow-lg">Hemen Al</button>
 </div>
 
-<div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 flex flex-col">
-<div class="mb-6">
-<span class="text-blue-600 font-bold uppercase tracking-widest text-xs">VIP Deneyim</span>
-<h3 class="text-2xl font-black text-gray-800">Detaylı Hijyen</h3>
-</div>
-<div class="text-5xl font-black text-blue-900 mb-8">₺2.400</div>
-<ul class="space-y-4 mb-10 flex-grow">
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Antibakteriyel Temizlik</li>
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Ozonla Dezenfeksiyon</li>
-<li class="flex items-center text-gray-600"><i class="fas fa-check-circle text-green-500 mr-3"></i> Motor Temizliği</li>
-<li class="flex items-center text-gray-300 italic line-through"><i class="fas fa-times-circle mr-3"></i> Jant Temizliği</li>
+<div class="bg-white rounded-3xl p-8 shadow-lg border-t-4 border-indigo-600">
+<h3 class="text-xl font-bold text-gray-800 mb-4 uppercase text-center">Detaylı Hijyen</h3>
+<div id="fiyat3" class="text-4xl font-black text-blue-900 text-center mb-8 italic">--</div>
+<ul class="space-y-4 mb-8 text-gray-600">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Antibakteriyel Temizlik</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Ozon Dezenfeksiyon</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Motor Temizliği</li>
 </ul>
-<button class="w-full py-4 rounded-xl border-2 border-gray-800 text-gray-800 font-bold hover:bg-gray-800 hover:text-white transition">Detayları Gör</button>
+<button class="w-full py-3 border-2 border-indigo-600 text-indigo-600 font-bold rounded-xl">Detayları Gör</button>
 </div>
 
 </div>
 </section>
-
-<div class="max-w-xl mx-auto bg-blue-50 border-l-8 border-blue-600 p-6 rounded-r-2xl mb-20">
-<div class="flex items-center">
-<i class="fas fa-shield-check text-blue-600 text-3xl mr-4"></i>
-<p class="text-blue-900 font-semibold leading-relaxed">
-<strong>Profesyonel Hizmet Güvencesi:</strong> Uzman ekibimiz, aracınız için en kaliteli pH-nötr ürünleri ve mikrofiber teknolojisini kullanır.
-</p>
-</div>
-</div>
 
 </div>
 
