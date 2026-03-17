@@ -1,104 +1,138 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<script>
-// --- AYARLAR PANELİ (Burayı Kendine Göre Düzenle) ---
-const siteAyarlari = {
-telefon: "05xx xxx xx xx",
-bolge: "İstanbul Geneli",
+<style>
+/* Karanlık Mod Geçiş Efekti */
+body { transition: background-color 0.5s, color 0.5s; }
+.dark-mode { background-color: #0f172a !important; color: #f1f5f9 !important; }
+.dark-mode .bg-white { background-color: #1e293b !important; color: white !important; }
+.dark-mode .text-gray-600, .dark-mode .text-gray-500 { color: #cbd5e1 !important; }
+</style>
 
-// Paket 1 Ayarları
-paket1Isim: "EKONOMİK DIŞ",
-paket1Fiyat: "650",
+<body class="bg-gray-50 font-sans">
 
-// Paket 2 Ayarları
-paket2Isim: "STANDART İÇ + DIŞ",
-paket2Fiyat: "1.100",
+<div class="bg-blue-600 text-white text-center py-2 text-xs md:text-sm font-bold">
+<i class="fas fa-bolt text-yellow-300 mr-2"></i>
+Şu an <select id="ilceSec" class="bg-blue-700 border-none rounded px-1 outline-none cursor-pointer">
+<option value="45">Beşiktaş</option>
+<option value="30">Üsküdar</option>
+<option value="60">Beylikdüzü</option>
+<option value="20">Kadıköy</option>
+</select> bölgesinde ekibimiz var. Tahmini varış: <span id="varisSuresi" class="underline">45</span> dk!
+</div>
 
-// Paket 3 Ayarları
-paket3Isim: "PREMİUM DETAYLI",
-paket3Fiyat: "2.400"
-};
-
-// Sayfa yüklendiğinde ayarları yerleştirir
-window.onload = () => {
-document.getElementById('telNo').innerText = siteAyarlari.telefon;
-document.getElementById('bolgeBilgi').innerText = siteAyarlari.bolge;
-
-document.getElementById('p1Ad').innerText = siteAyarlari.paket1Isim;
-document.getElementById('p1Fiyat').innerText = '₺' + siteAyarlari.paket1Fiyat;
-
-document.getElementById('p2Ad').innerText = siteAyarlari.paket2Isim;
-document.getElementById('p2Fiyat').innerText = '₺' + siteAyarlari.paket2Fiyat;
-
-document.getElementById('p3Ad').innerText = siteAyarlari.paket3Isim;
-document.getElementById('p3Fiyat').innerText = '₺' + siteAyarlari.paket3Fiyat;
-};
-</script>
-
-<body class="bg-gray-100 font-sans antialiased">
-
-<nav class="bg-white shadow-lg p-4 sticky top-0 z-50">
+<nav class="bg-white shadow-md p-4 sticky top-0 z-50">
 <div class="max-w-6xl mx-auto flex justify-between items-center">
 <div class="flex items-center space-x-2">
-<i class="fas fa-soap text-blue-600 text-3xl"></i>
-<span class="font-black text-2xl text-blue-900 tracking-tight">MOBİL YIKAMA</span>
+<i class="fas fa-spray-can-sparkles text-blue-600 text-2xl"></i>
+<span class="font-black text-xl text-blue-900 tracking-tighter">MOBİL YIKAMA</span>
 </div>
-<div class="hidden md:flex flex-col text-right">
-<span id="telNo" class="font-bold text-blue-700">--</span>
-<span id="bolgeBilgi" class="text-xs text-gray-500 uppercase tracking-widest">--</span>
+<div class="flex items-center space-x-4">
+<button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-100 transition">
+<i id="darkIcon" class="fas fa-moon text-gray-600"></i>
+</button>
+<span class="hidden md:block font-bold text-blue-600">05xx xxx xx xx</span>
 </div>
 </div>
 </nav>
 
-<section class="max-w-6xl mx-auto px-4 py-16">
-<h2 class="text-3xl font-black text-center text-gray-800 mb-12 uppercase">Hizmet Paketlerimiz</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="bg-white rounded-3xl p-8 shadow-md border-b-8 border-blue-400">
-<h3 id="p1Ad" class="text-lg font-bold text-gray-500 mb-4 tracking-tighter uppercase">--</h3>
-<div id="p1Fiyat" class="text-5xl font-black text-blue-900 mb-8 tracking-tight">--</div>
-<ul class="space-y-4 mb-8 text-sm text-gray-600">
-<li><i class="fas fa-check-circle text-blue-500 mr-2"></i> Köpüklü Yıkama</li>
-<li><i class="fas fa-check-circle text-blue-500 mr-2"></i> Cam Temizliği</li>
-<li class="opacity-30 italic"><i class="fas fa-times-circle mr-2"></i> Jant Temizliği Yok</li>
-</ul>
-<button class="w-full py-3 rounded-xl border-2 border-blue-600 text-blue-600 font-bold hover:bg-blue-600 hover:text-white transition uppercase text-xs tracking-widest">Paketi Seç</button>
+<div id="slider" class="h-[400px] bg-cover bg-center transition-all duration-1000 flex items-center justify-center relative"
+style="background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=1200');">
+<div class="absolute inset-0 bg-black/40"></div>
+<div class="relative text-center text-white p-6">
+<h1 class="text-4xl md:text-6xl font-black mb-4 italic uppercase">Arabanız Parlasın</h1>
+<button class="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full font-black shadow-xl transition-all hover:scale-105 uppercase tracking-widest">Randevu Al</button>
+</div>
 </div>
 
-<div class="bg-white rounded-3xl p-8 shadow-2xl border-b-8 border-blue-600 transform scale-105 relative">
-<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase">Popüler</div>
-<h3 id="p2Ad" class="text-lg font-bold text-gray-500 mb-4 tracking-tighter uppercase">--</h3>
-<div id="p2Fiyat" class="text-5xl font-black text-blue-900 mb-8 tracking-tight">--</div>
-<ul class="space-y-4 mb-8 text-sm text-gray-600">
-<li><i class="fas fa-check-circle text-blue-500 mr-2"></i> İç & Dış Temizlik</li>
-<li><i class="fas fa-check-circle text-blue-500 mr-2"></i> Torpido Bakımı</li>
-<li class="opacity-30 italic"><i class="fas fa-times-circle mr-2"></i> Jant Temizliği Yok</li>
-</ul>
-<button class="w-full py-4 bg-blue-600 text-white font-black rounded-xl hover:bg-blue-700 transition uppercase shadow-xl shadow-blue-200">Randevu Al</button>
+<section class="max-w-2xl mx-auto px-4 -mt-10 relative z-20">
+<div class="bg-white p-6 rounded-2xl shadow-2xl border-2 border-blue-100">
+<h4 class="text-center font-bold text-gray-700 mb-4 text-sm">SADAKAT PROGRAMI: 5. YIKAMA %50 İNDİRİMLİ!</h4>
+<div class="flex space-x-2">
+<input type="text" id="plakaInput" placeholder="Plakanızı girin (Örn: 34ABC123)" class="flex-1 border p-3 rounded-xl uppercase font-bold text-center">
+<button onclick="plakaSorgula()" class="bg-blue-600 text-white px-6 rounded-xl font-bold">Sorgula</button>
 </div>
-
-<div class="bg-white rounded-3xl p-8 shadow-md border-b-8 border-indigo-600">
-<h3 id="p3Ad" class="text-lg font-bold text-gray-500 mb-4 tracking-tighter uppercase">--</h3>
-<div id="p3Fiyat" class="text-5xl font-black text-blue-900 mb-8 tracking-tight">--</div>
-<ul class="space-y-4 mb-8 text-sm text-gray-600">
-<li><i class="fas fa-check-circle text-indigo-500 mr-2"></i> Antibakteriyel Temizlik</li>
-<li><i class="fas fa-check-circle text-indigo-500 mr-2"></i> Ozon Dezenfeksiyon</li>
-<li class="opacity-30 italic"><i class="fas fa-times-circle mr-2"></i> Jant Temizliği Yok</li>
-</ul>
-<button class="w-full py-3 rounded-xl border-2 border-indigo-600 text-indigo-600 font-bold hover:bg-indigo-600 hover:text-white transition uppercase text-xs tracking-widest">Detayları Gör</button>
-</div>
-
+<p id="sorguSonuc" class="mt-3 text-center text-sm font-medium text-blue-600 hidden"></p>
 </div>
 </section>
 
-<div class="max-w-4xl mx-auto px-4 pb-20">
-<div class="bg-white p-6 rounded-2xl flex items-center justify-center space-x-4 border border-gray-200 shadow-sm">
-<i class="fas fa-medal text-yellow-500 text-3xl"></i>
-<p class="text-gray-700 font-medium">Uzman ekibimizle %100 profesyonel ve kaliteli hizmet sağlıyoruz.</p>
+<section class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-3 gap-8 text-center">
+<div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-blue-400">
+<h3 class="font-bold text-gray-400 text-sm uppercase">Eko Dış</h3>
+<div class="text-4xl font-black text-blue-900 my-4">₺650</div>
+<ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Köpüklü Yıkama</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Cam Temizliği</li>
+</ul>
+<button class="w-full py-3 rounded-xl bg-blue-50 text-blue-600 font-bold hover:bg-blue-600 hover:text-white transition">SEÇ</button>
 </div>
+<div class="bg-white p-8 rounded-3xl shadow-2xl border-b-4 border-blue-600 transform scale-105 relative">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-bold">POPÜLER</div>
+<h3 class="font-bold text-gray-400 text-sm uppercase">Standart İç+Dış</h3>
+<div class="text-4xl font-black text-blue-900 my-4">₺1.100</div>
+<ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Detaylı Dış Yıkama</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> İç Vakumlama & Toz Alma</li>
+</ul>
+<button class="w-full py-4 rounded-xl bg-blue-600 text-white font-black shadow-lg">HEMEN AL</button>
 </div>
+<div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-indigo-600">
+<h3 class="font-bold text-gray-400 text-sm uppercase">Premium VIP</h3>
+<div class="text-4xl font-black text-blue-900 my-4">₺2.400</div>
+<ul class="text-sm text-gray-600 space-y-2 mb-6 text-left">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Antibakteriyel Temizlik</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Ozon Dezenfeksiyon</li>
+</ul>
+<button class="w-full py-3 rounded-xl bg-gray-100 text-indigo-600 font-bold hover:bg-indigo-600 hover:text-white transition">SEÇ</button>
+</div>
+</section>
 
+<a href="https://wa.me/905XXXXXXXXX" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-[100] flex items-center group">
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 whitespace-nowrap font-bold text-sm">Hemen Yazın &nbsp;</span>
+<i class="fab fa-whatsapp text-3xl"></i>
+</a>
+
+<script>
+// 1. Özellik: İlçe Seçimine Göre Süre Değişimi
+document.getElementById('ilceSec').addEventListener('change', function() {
+document.getElementById('varisSuresi').innerText = this.value;
+});
+
+// 3. Özellik: Plaka Sorgulama Simülasyonu
+function plakaSorgula() {
+const plaka = document.getElementById('plakaInput').value;
+const sonuc = document.getElementById('sorguSonuc');
+if(plaka.length < 5) return alert("Lütfen geçerli bir plaka girin.");
+sonuc.classList.remove('hidden');
+sonuc.innerText = "Tebrikler " + plaka.toUpperCase() + "! Bu 3. yıkamanız. 2 yıkama sonra %50 indirimlisiniz!";
+}
+
+// 4. Özellik: Gece Modu
+function toggleDarkMode() {
+document.body.classList.toggle('dark-mode');
+const icon = document.getElementById('darkIcon');
+if (document.body.classList.contains('dark-mode')) {
+icon.classList.replace('fa-moon', 'fa-sun');
+icon.style.color = '#fbbf24';
+} else {
+icon.classList.replace('fa-sun', 'fa-moon');
+icon.style.color = '#4b5563';
+}
+}
+
+// Slider Fonksiyonu
+const resimler = [
+"https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=1200",
+"https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1200",
+"https://images.unsplash.com/photo-1552933529-e359b2477252?w=1200"
+];
+let i = 0;
+setInterval(() => {
+i = (i + 1) % resimler.length;
+document.getElementById('slider').style.backgroundImage = `url('${resimler[i]}')`;
+}, 4000);
+</script>
 </body>
+
+
 
