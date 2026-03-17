@@ -1,53 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobil Wash 2026 | Kapınızda Profesyonel Temizlik</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <style>
-/* 1. DERİNLİK EFEKTİ (Ken Burns) */
+/* DERİNLİK VE HAREKET EFEKTLERİ */
 @keyframes zoomEffect {
 0% { transform: scale(1); }
-100% { transform: scale(1.15); } /* Hafifçe yakınlaşarak derinlik katar */
+100% { transform: scale(1.12); }
 }
 
-/* Slider alanını ve resimleri hareketlendiriyoruz */
-#slider {
-position: relative;
-overflow: hidden; /* Taşmaları engeller */
-}
+body { transition: background-color 0.5s, color 0.5s; scroll-behavior: smooth; }
 
-/* Görsellerin akıcı geçişi ve sürekli hareketi */
+.dark-mode { background-color: #0f172a !important; color: #f1f5f9 !important; }
+.dark-mode .bg-white { background-color: #1e293b !important; color: white !important; }
+.dark-mode .text-gray-600, .dark-mode .text-gray-900 { color: #cbd5e1 !important; }
+
+/* Arka Plan Slider Stili */
 .slider-bg {
-position: absolute;
-inset: 0;
-background-size: cover;
-background-position: center;
-transition: opacity 1.5s ease-in-out; /* Resimler arası yumuşak geçiş */
-animation: zoomEffect 8s infinite alternate ease-in-out; /* Sürekli derinlik hareketi */
+position: absolute; inset: 0;
+background-size: cover; background-position: center;
+transition: opacity 1.5s ease-in-out;
+animation: zoomEffect 10s infinite alternate ease-in-out;
 opacity: 0;
 }
+.slider-bg.active { opacity: 1; }
 
-.slider-bg.active {
-opacity: 1;
+/* Kart Parlama Efekti */
+.card:hover { transform: translateY(-8px); transition: 0.3s; }
+
+/* Bildirim Animasyonu */
+@keyframes slideIn {
+from { transform: translateX(-110%); }
+to { transform: translateX(0); }
 }
+.notification-anim { animation: slideIn 0.5s ease-out; }
 </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
 
-<div id="slider" class="h-[400px] flex items-center justify-center relative">
+<div class="bg-blue-600 text-white text-center py-2 text-xs md:text-sm font-bold sticky top-0 z-[60]">
+<i class="fas fa-bolt text-yellow-300 mr-2"></i>
+Şu an
+<select id="ilceSec" class="bg-blue-700 border-none rounded px-1 outline-none cursor-pointer">
+<option value="45">Beşiktaş</option>
+<option value="30">Üsküdar</option>
+<option value="60">Beylikdüzü</option>
+<option value="25">Kadıköy</option>
+</select>
+bölgesindeyiz. Tahmini varış: <span id="varisSuresi" class="underline">45</span> dk!
+</div>
+
+<nav class="bg-white/90 backdrop-blur-md shadow-md p-4 sticky top-[32px] md:top-[36px] z-50">
+<div class="max-w-6xl mx-auto flex justify-between items-center">
+<div class="flex items-center space-x-2">
+<i class="fas fa-car-on text-blue-600 text-2xl"></i>
+<span class="font-black text-xl tracking-tighter uppercase">Mobil Wash</span>
+</div>
+<div class="flex items-center space-x-4">
+<button onclick="toggleDarkMode()" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition">
+<i id="darkIcon" class="fas fa-moon text-gray-600"></i>
+</button>
+<a href="tel:+905000000000" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold text-sm hidden md:block">Hemen Ara</a>
+</div>
+</div>
+</nav>
+
+<header class="h-[500px] relative overflow-hidden flex items-center justify-center text-center">
 <div id="bg-1" class="slider-bg active" style="background-image: url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?w=1200');"></div>
 <div id="bg-2" class="slider-bg" style="background-image: url('https://images.unsplash.com/photo-1607860108855-64acf2078ed9?w=1200');"></div>
 
-<div class="absolute inset-0 bg-black/40 z-10"></div>
+<div class="absolute inset-0 bg-black/50 z-10"></div>
 
-<div class="relative z-20 text-center text-white p-6">
-<h1 class="text-4xl md:text-6xl font-black mb-4 italic uppercase">Arabanız Parlasın</h1>
-<button class="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full font-black shadow-xl transition-all hover:scale-105 uppercase tracking-widest">Randevu Al</button>
+<div class="relative z-20 text-white px-4">
+<h1 class="text-5xl md:text-7xl font-black mb-4 italic uppercase tracking-tighter">Arabanız Parlasın</h1>
+<p class="text-lg md:text-xl mb-8 opacity-90">Kapınızda profesyonel, susuz veya köpüklü yıkama seçenekleriyle.</p>
+<a href="#fiyatlar" class="bg-green-500 hover:bg-green-600 text-white px-10 py-4 rounded-full font-black text-lg transition-all shadow-2xl inline-block">FİYATLARI GÖR</a>
+</div>
+</header>
+
+<section class="max-w-4xl mx-auto px-4 -mt-12 relative z-30">
+<div class="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-2xl text-center border-b-4 border-blue-600">
+<h2 class="text-sm font-bold text-gray-500 mb-4 uppercase tracking-widest">Aracınızın Tipini Seçin</h2>
+<div class="flex justify-center space-x-3">
+<button onclick="fiyatGuncelle(1, this)" class="arac-btn flex-1 bg-blue-600 text-white py-3 rounded-2xl font-bold transition-all">Binek</button>
+<button onclick="fiyatGuncelle(1.3, this)" class="arac-btn flex-1 border-2 border-blue-600 text-blue-600 py-3 rounded-2xl font-bold transition-all hover:bg-blue-50">SUV / Jip</button>
 </div>
 </div>
+</section>
+
+<section id="fiyatlar" class="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-3 gap-8">
+<div class="card bg-white p-8 rounded-[2rem] shadow-xl text-center border-b-4 border-blue-400">
+<h3 class="text-gray-400 font-bold uppercase text-xs">Eko Paket</h3>
+<div class="text-5xl font-black text-blue-900 my-6" id="f1">₺650</div>
+<ul class="text-left text-sm space-y-3 mb-8 text-gray-600">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Dış Yıkama & Kurulama</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Lastik Parlatma</li>
+</ul>
+<button class="w-full py-3 bg-gray-100 rounded-xl font-bold hover:bg-blue-600 hover:text-white transition">Seç</button>
+</div>
+<div class="card bg-white p-8 rounded-[2rem] shadow-2xl text-center border-b-4 border-blue-600 scale-105 relative">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-bold">EN ÇOK TERCİH EDİLEN</div>
+<h3 class="text-gray-400 font-bold uppercase text-xs">Standart Detay</h3>
+<div class="text-5xl font-black text-blue-900 my-6" id="f2">₺1.100</div>
+<ul class="text-left text-sm space-y-3 mb-8 text-gray-600">
+<li><i class="fas fa-check text-green-500 mr-2"></i> İç & Dış Detaylı Temizlik</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Vakumlu Süpürme</li>
+</ul>
+<button class="w-full py-4 bg-blue-600 text-white rounded-xl font-black shadow-lg">HEMEN AL</button>
+</div>
+<div class="card bg-white p-8 rounded-[2rem] shadow-xl text-center border-b-4 border-indigo-600">
+<h3 class="text-gray-400 font-bold uppercase text-xs">Premium VIP</h3>
+<div class="text-5xl font-black text-blue-900 my-6" id="f3">₺2.400</div>
+<ul class="text-left text-sm space-y-3 mb-8 text-gray-600">
+<li><i class="fas fa-check text-green-500 mr-2"></i> Antibakteriyel Ozon Temizliği</li>
+<li><i class="fas fa-check text-green-500 mr-2"></i> Boya Koruma & Cila</li>
+</ul>
+<button class="w-full py-3 bg-indigo-50 text-indigo-600 rounded-xl font-bold hover:bg-indigo-600 hover:text-white transition">Seç</button>
+</div>
+</section>
+
+<section class="max-w-2xl mx-auto px-4 py-10">
+<div class="bg-blue-50 dark:bg-slate-700 p-8 rounded-3xl border-2 border-dashed border-blue-300">
+<h4 class="text-center font-bold mb-4">5. Yıkama %50 İndirimli! Plakanızı Sorgulayın:</h4>
+<div class="flex space-x-2">
+<input type="text" id="plakaInput" placeholder="34ABC123" class="flex-1 p-3 rounded-xl border-none font-bold text-center uppercase">
+<button onclick="plakaSorgula()" class="bg-gray-900 text-white px-6 rounded-xl font-bold hover:bg-black transition">Sorgula</button>
+</div>
+<p id="sorguSonuc" class="mt-4 text-center text-sm font-bold text-blue-600 hidden"></p>
+</div>
+</section>
+
+<div id="bildirim" class="fixed left-4 bottom-24 z-[100] hidden">
+<div class="notification-anim bg-white dark:bg-slate-800 shadow-2xl rounded-2xl p-4 border-l-4 border-green-500 flex items-center space-x-3">
+<div class="text-xs">
+<p id="bildirimMetin" class="font-bold text-gray-800 dark:text-white"></p>
+<p class="text-gray-400">Az önce hizmet tamamlandı</p>
+</div>
+</div>
+</div>
+
+<a href="https://wa.me/905000000000" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-2xl z-[100] hover:scale-110 transition flex items-center group">
+<span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 whitespace-nowrap font-bold text-sm">Hemen Yazın &nbsp;</span>
+<i class="fab fa-whatsapp text-3xl"></i>
+</a>
 
 <script>
-// GÖRSEL HAREKET SİSTEMİ (JS)
+// SLIDER (Görsel Hareket ve Geçiş)
 let currentBg = 1;
 setInterval(() => {
 document.getElementById(`bg-${currentBg}`).classList.remove('active');
 currentBg = currentBg === 1 ? 2 : 1;
 document.getElementById(`bg-${currentBg}`).classList.add('active');
-}, 5000); // 5 saniyede bir resim değişir, derinlik efekti sürekli çalışır
+}, 5000);
+
+// İLÇE SÜRE GÜNCELLEME
+document.getElementById('ilceSec').addEventListener('change', function() {
+document.getElementById('varisSuresi').innerText = this.value;
+});
+
+// FİYAT HESAPLAYICI
+const anaFiyatlar = [650, 1100, 2400];
+function fiyatGuncelle(carpan, btn) {
+document.getElementById('f1').innerText = "₺" + Math.round(anaFiyatlar[0] * carpan);
+document.getElementById('f2').innerText = "₺" + Math.round(anaFiyatlar[1] * carpan);
+document.getElementById('f3').innerText = "₺" + Math.round(anaFiyatlar[2] * carpan);
+
+document.querySelectorAll('.arac-btn').forEach(b => {
+b.classList.replace('bg-blue-600', 'text-blue-600');
+b.classList.remove('text-white');
+});
+btn.classList.replace('text-blue-600', 'bg-blue-600');
+btn.classList.add('text-white');
+}
+
+// PLAKA SORGULAMA
+function plakaSorgula() {
+const p = document.getElementById('plakaInput').value;
+const s = document.getElementById('sorguSonuc');
+if(p.length < 5) return alert("Lütfen geçerli plaka girin.");
+s.classList.remove('hidden');
+s.innerText = `Tebrikler ${p.toUpperCase()}! Bu 3. yıkamanız. Hediyeye son 2!`;
+}
+
+// CANLI BİLDİRİMLER
+const yerler = ["Beşiktaş", "Kadıköy", "Etiler", "Üsküdar", "Florya"];
+const arabalar = ["Mercedes", "BMW", "Audi", "Tesla", "VW"];
+setInterval(() => {
+const b = document.getElementById('bildirim');
+const m = document.getElementById('bildirimMetin');
+const rY = yerler[Math.floor(Math.random()*yerler.length)];
+const rA = arabalar[Math.floor(Math.random()*arabalar.length)];
+m.innerText = `${rY} bölgesinde bir ${rA} yıkandı!`;
+b.classList.remove('hidden');
+setTimeout(() => b.classList.add('hidden'), 4000);
+}, 12000);
+
+// KARANLIK MOD
+function toggleDarkMode() {
+document.body.classList.toggle('dark-mode');
+const icon = document.getElementById('darkIcon');
+icon.classList.toggle('fa-moon');
+icon.classList.toggle('fa-sun');
+}
 </script>
+</body>
+</html>
 
 
 
