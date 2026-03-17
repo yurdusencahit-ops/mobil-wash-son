@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobil Wash | Kapıda Araç Yıkama</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+body { font-family: 'Poppins', sans-serif; }
+.hero-bg {
+position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1200&q=80');
+background-size: cover; background-position: center; z-index: -1;
+}
+#admin-panel {
+display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+background: white; padding: 25px; border-radius: 20px; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+z-index: 9999; width: 320px; border-top: 6px solid #2563eb;
+}
+</style>
+</head>
+<body class="bg-gray-50">
+
+<div id="notification" class="fixed bottom-6 left-6 bg-white p-4 rounded-2xl shadow-2xl z-50 border-l-8 border-blue-600 flex items-center">
+<i class="fa-solid fa-circle-check text-blue-600 mr-3 text-xl"></i>
+<p id="notif-text" class="text-sm font-bold text-gray-700 italic text-sm font-bold">Beşiktaş'ta bir araç yıkandı!</p>
+</div>
+
+<header class="relative text-white py-32 text-center px-4">
+<div class="hero-bg"></div>
+<h1 class="text-6xl font-black mb-4 uppercase leading-tight">MOBİL<span class="text-blue-500">WASH</span></h1>
+<p class="text-2xl font-bold mb-10 uppercase tracking-wide">Aracınızı Kapınızda Yıkıyoruz!</p>
+<a href="https://wa.me/905307366945" class="bg-green-500 hover:bg-green-600 text-white px-12 py-5 rounded-3xl text-xl font-black transition shadow-2xl flex items-center justify-center inline-flex">
+<i class="fa-brands fa-whatsapp text-3xl mr-3"></i> WHATSAPP RANDEVU
+</a>
+</header>
+
+<section class="py-20 max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-10">
+<div class="bg-white p-10 rounded-[45px] shadow-xl text-center border-b-8 border-blue-500">
+<i class="fa-solid fa-car text-6xl text-blue-500 mb-6"></i>
+<h4 class="text-2xl font-black mb-4 uppercase tracking-tighter">Binek Araç</h4>
+<div id="p-binek" class="text-5xl font-black text-blue-600 mb-4 tracking-tighter leading-none">550 TL</div>
+<p class="text-gray-400 font-bold uppercase italic text-xs">Profesyonel Dış Yıkama</p>
+</div>
+<div class="bg-white p-10 rounded-[45px] shadow-xl text-center border-b-8 border-blue-900">
+<i class="fa-solid fa-truck-monster text-6xl text-blue-900 mb-6"></i>
+<h4 class="text-2xl font-black mb-4 uppercase tracking-tighter">SUV / VIP</h4>
+<div id="p-suv" class="text-5xl font-black text-blue-600 mb-4 tracking-tighter leading-none">750 TL</div>
+<p class="text-gray-400 font-bold uppercase italic text-xs">Büyük Araç Dış Yıkama</p>
+</div>
+</section>
+
+<footer class="bg-gray-900 text-white py-16 text-center px-4">
+<p class="text-3xl font-black mb-4 tracking-widest text-blue-500">0530 736 69 45</p>
+<p class="text-gray-500 font-medium">İstanbul'un her noktasına mobil hizmet.</p>
+<button onclick="adminAc()" class="mt-12 text-gray-800 text-[10px] opacity-10 hover:opacity-100 uppercase font-black">Ayarlar</button>
+</footer>
+
+<div id="admin-panel">
+<h4 class="text-lg font-black mb-4 border-b-2 pb-2 text-blue-600 uppercase">Fiyat Ayarları</h4>
+<label class="text-[10px] font-bold text-gray-400 uppercase">Binek Fiyatı</label>
+<input id="in-binek" type="text" class="w-full border-2 p-2 mb-3 rounded-lg outline-none focus:border-blue-500 font-bold">
+<label class="text-[10px] font-bold text-gray-400 uppercase">SUV Fiyatı</label>
+<input id="in-suv" type="text" class="w-full border-2 p-2 mb-3 rounded-lg outline-none focus:border-blue-500 font-bold">
+<label class="text-[10px] font-bold text-gray-400 uppercase">Bölgeler (Virgülle)</label>
+<textarea id="in-cities" class="w-full border-2 p-2 mb-4 rounded-lg outline-none focus:border-blue-500 h-20 text-sm font-medium"></textarea>
+<button onclick="kaydet()" class="bg-blue-600 text-white w-full py-3 rounded-xl font-black shadow-lg">AYARLARI KAYDET</button>
+<button onclick="document.getElementById('admin-panel').style.display='none'" class="w-full mt-3 text-red-500 text-xs font-bold uppercase">Kapat</button>
+</div>
+
+<script>
+let bVal = localStorage.getItem('s_binek') || "550 TL";
+let sVal = localStorage.getItem('s_suv') || "750 TL";
+let cVal = (localStorage.getItem('s_cities') || "Beşiktaş, Şişli, Kadıköy, Sarıyer, Üsküdar, Bakırköy, Ataşehir").split(',');
+
+document.getElementById('p-binek').innerText = bVal;
+document.getElementById('p-suv').innerText = sVal;
+
+function adminAc() {
+let s = prompt("Yönetici Şifresi:");
+if(s === "1234") {
+document.getElementById('admin-panel').style.display = 'block';
+document.getElementById('in-binek').value = bVal;
+document.getElementById('in-suv').value = sVal;
+document.getElementById('in-cities').value = cVal.join(', ');
+}
+}
+
+function kaydet() {
+localStorage.setItem('s_binek', document.getElementById('in-binek').value);
+localStorage.setItem('s_suv', document.getElementById('in-suv').value);
+localStorage.setItem('s_cities', document.getElementById('in-cities').value);
+alert("Siteniz Güncellendi!");
+location.reload();
+}
+
+setInterval(() => {
+const city = cVal[Math.floor(Math.random() * cVal.length)];
+document.getElementById('notif-text').innerText = `${city.trim()}'ta bir araç yıkandı!`;
+}, 6000);
+</script>
+</body>
+</html>
+
+
